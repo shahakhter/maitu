@@ -1,0 +1,131 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" class="back"></ion-icon>
+    </ion-buttons>
+    <ion-avatar slot="start" class="contact-avatar ion-margin-start">
+      <ion-img src="{{photoURL}}"></ion-img>
+    </ion-avatar>
+    <ion-title>
+      <ion-label>
+        <h2>{{ displayName }}</h2>
+        <p><small class="text-muted" *ngIf="status == 'offline'">offline</small></p>
+        <p><small class="text-muted" *ngIf="status == 'online'">online</small></p>
+        <p><small class="text-muted" *ngIf="status == 'away'">away</small></p>
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="end" (click)="presentActionSheetReport(displayName)">
+      <ion-icon name="options-outline" class="options"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="chat-list">
+    <div class="chat-item" *ngFor="let msg of msgList | async" [ngClass]="{'chat-item-sender': msg.fromID == myuid}">
+      <section *ngIf="((msg.fromID == myuid) && (msg.toID == userId)) || ((msg.fromID == userId) && (msg.toID == myuid))">
+  
+      <div class="chat-timestamp">
+        {{msg.timeStamp | DateFormat | lowercase}}
+      </div>
+
+      <ion-item lines="none" class="chat-item-content ion-no-padding" *ngIf="msg.fromID !== myuid">
+        <div class="chat-avatar" *ngIf="msg.fromID != myuid">
+          <ion-avatar class="contact-avatar">
+            <ion-img src="{{photoURL}}"></ion-img>
+          </ion-avatar>
+        </div>
+
+        
+        <div class="chat-item-bubble" [ngClass]="{'bubble-image': msg.type === 'images'}">
+          <div class="chat-body" *ngIf="msg.type === 'text' && msg.type !== 'images'" [innerHTML]="msg.msg"></div>
+          <img [src]="msg.msg" *ngIf="msg.type === 'images'" (click)="openImage(msg.msg)">
+        </div>
+
+        <div class="chat-item-reaction" *ngIf="msg.fromID != myuid">
+          <!-- <ion-icon name="share-outline"></ion-icon> -->
+        </div>
+      </ion-item>
+
+      <div class="chat-item-content ion-no-padding" *ngIf="msg.fromID === myuid">
+        <div class="chat-item-bubble" [ngClass]="{'bubble-image': msg.type === 'images'}">
+          <div class="chat-body" *ngIf="msg.type === 'text' && msg.type !== 'images'" [innerHTML]="msg.msg"></div>
+          <img [src]="msg.msg" *ngIf="msg.type === 'images'" (click)="openImage(msg.msg)">
+        </div>
+      </div>
+
+      <div class="chat-item-status" *ngIf="msg.fromID == myuid">
+       <ion-icon *ngIf="msg.unread == 0" name="checkmark-done-outline" style="color: green; font-size: 15px;"></ion-icon>
+       <ion-icon *ngIf="msg.unread == 1" name="checkmark-outline" style="color: black; font-size: 15px"></ion-icon>
+      </div>
+      </section>
+    </div>
+  </div>
+</ion-content>
+
+
+ 
+
+<ion-footer [style.height]="showEmojiPicker ? '260px' : '55px'">
+  <!--<input id="file" type='file' style="display: none;"(change)="detectFiles()" multiple>-->
+  <input id="file" type='file' style="display: none;" (change)="onSelectFile($event)">
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="!isFocus">
+      <ion-button (click)="switchEmojiPicker()">
+        <ion-icon slot="icon-only" name="happy-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onTrigger()">
+        <ion-icon slot="icon-only" name="document-attach-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start" *ngIf="isFocus">
+      <ion-button>
+        <ion-icon slot="icon-only" name="chevron-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-input
+      class="message-input"
+      placeholder="Write your message..."
+      [(ngModel)]="msg"
+      (ionFocus)="toggleFocus(true)"
+      (ionBlur)="toggleFocus(false)">
+    </ion-input>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="sendMessage()" [disabled]="!msg" color="primary">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div>
+    <ngx-emoj
+    (onemojipick)="handleEmoji($event)"
+    (onchardelete)="handleCharDelete($event)"
+    [width]="'60vh'"
+    [height]="'40vh'"
+    [theme]="{
+      martShowHeader: true,
+      martShowFooter: true,
+      martHeaderPadding: {x: '0', y: '0'},
+      martFooterPadding: {x: '0', y: '0'},
+      martHeaderFontSize: '14px',
+      martHeaderBG: '#e3e7e8',
+      martFooterBG: '#e3e7e8',
+      martBG: '#ebeff2',
+      martCategoryColor: '#94a0a6',
+      martCategoryColorActive: '#455a64',
+      martActiveCategoryIndicatorColor: '#00897b',
+      martEmojiFontSize: '150%',
+      martCategoryFontSize: '20px',
+      martBorderRadius: '5px',
+      martActiveCategoryIndicatorHeight: '4px',
+      martEmojiPadding: {x: '40px', y: '40px'}
+    }"
+    [recentEmojiStoreKey]="'String'"
+    [searchEmojiPlaceholderText]="'String'"
+    [emojiNotFoundText]="'String'">
+</ngx-emoj>
+  </div>
+</ion-footer>

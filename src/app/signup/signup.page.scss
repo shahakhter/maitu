@@ -1,0 +1,68 @@
+ion-grid,
+ion-row {
+    height: 100%;
+}
+
+form {
+    ion-item {
+        --background: #f3f3f4 !important;
+        --padding-end: 8px;
+        --padding-start: 8px;
+        margin: 16px 10px !important;
+        width: calc(100% - 22px);
+        border-radius: 4px !important;
+
+        ion-input {
+            // --padding-bottom: 16px;
+            // --padding-end: 32px;
+            --padding-start: 16px;
+            // --padding-top: 16px;
+            // margin: 10px 0px !important;
+            // width: calc(100% - 22px);
+            // box-shadow: 0 3px 13px rgba(0, 0, 0, 0.16);
+        }
+
+        ion-select {
+            width: 100%;
+            color: #969695 !important;
+        }
+
+        .error-icon {
+            position: absolute;
+            right: 0px;
+            bottom: 15px;
+            z-index: 999;
+        }
+
+        ion-label {
+            transform: none;
+            margin: 5px 0 0 0 !important;
+        }
+    }
+
+    .dob {
+        --background: #f3f3f4 !important;
+        --padding-end: 0px;
+        --padding-start: 8px;
+        margin: 10px 5px !important;
+        width: calc(100% - 14px);
+        border-radius: 20px !important;
+
+        ion-select::part(icon) {
+            opacity: 1;
+            margin-left: 1em;
+            color: transparent;
+            background: url("chevron-down-outline.svg") no-repeat center;
+        }
+    }
+}
+
+.birthday {
+    margin-left: 8px;
+}
+
+.signup-button {
+    height: 50px;
+    font-size: 16px;
+    --box-shadow: none;
+}

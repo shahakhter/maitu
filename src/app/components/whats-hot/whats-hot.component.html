@@ -1,0 +1,165 @@
+<ion-grid class="ion-no-padding" class="slide-posts">
+  <ion-row>
+    <ion-col size="12" class="ion-no-margin-bottom">
+      <ion-slides [options]="optionsm" pager="true">
+        <ion-slide *ngFor="let item of posts">
+          <ion-card class="post-list-card" (click)="goCardDetails(item)"
+            [ngStyle]="{background: 'linear-gradient(rgba(0,0,0,0.4) 100%, rgba(0,36,61,0.4) 80%), url('+ item.image +')', 'background-size': 'cover'}">
+
+            <ion-card-content class="post-list-content">
+              <ion-label class="text-color-secondary group-name">
+                {{item.group}}
+              </ion-label>
+              <ion-item lines="none" class="transparent">
+                <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+                  <img [src]="item.profile">
+                </ion-avatar>
+                <ion-label class="custom-font text-color-secondary">
+                  {{item.name}}
+                </ion-label>
+              </ion-item>
+              <p class="text-color-secondary font-bold description text-size-xs">
+                {{item.description}}
+              </p>
+            </ion-card-content>
+            <ion-item lines="none" class="transparent caption">
+              <ion-buttons slot="start">
+                <ion-button color="light">
+                  <ion-icon slot="start" name="heart-outline"></ion-icon>
+                  <small>12</small>
+                </ion-button>
+                <ion-button color="light">
+                  <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
+                  <small>34</small>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid class="ion-no-margin-top ion-no-padding-top">
+  <ion-row>
+    <ion-col size="12">
+      <ion-card class="list-card" *ngFor="let item of feeds">
+        <ion-item lines="none">
+          <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+            <img [src]="item.picture.thumbnail">
+          </ion-avatar>
+          <ion-label class="custom-font">
+            {{item.name.first}}
+            <span class="custom-font text-size-sd text-color-primary">posted in <span
+                style="color: #DF236C;">Pregnancy</span></span>
+            <p class="text-size-sm text-color-primary">
+              <span>1 hour ago</span>
+            </p>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button color="medium">
+              <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+
+        <ion-card-content class="list-content">
+
+          <p class="ion-no-margin-top custom-font text-color-accent
+                ion-padding-start ion-padding-end">
+            {{ caption }}
+          </p>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <div class="sensitive ion-text-center">
+                  <ion-item lines="none" class="transparent">
+                    <ion-icon slot="end" class="help" color="light" name="help-circle-outline"></ion-icon>
+                  </ion-item>
+                  <ion-label class="text-size-xs text-color-secondary font-regular">
+                    Sensitive content
+                  </ion-label>
+                  <br>
+                  <ion-label class="text-size-sm text-color-secondary font-light">
+                    This post contains content that the author has marked as sensitive. Some people may find this emotionally triggering.
+                  </ion-label>
+                  <br>
+                  <ion-button fill="clear" class="show-post" expand="block">
+                    SHOW POST
+                  </ion-button>
+                </div>
+              </ion-col>
+            </ion-row>  
+          </ion-grid>
+          
+          <!-- <ion-img class="img" src="https://picsum.photos/id/{{item.dob.age}}/200"></ion-img> -->
+
+        </ion-card-content>
+
+        <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+          <ion-buttons slot="start">
+            <ion-button color="medium">
+              <ion-icon slot="start" color="app-primary" name="heart"></ion-icon>
+              <small>12</small>
+            </ion-button>
+            <ion-button color="medium">
+              <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
+              <small>34</small>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button color="medium">
+              <ion-icon name="share-social-outline"></ion-icon>
+              <small>Share</small>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon src="./assets/svg/like.svg" slot="start" class="docIcon"></ion-icon>
+          <ion-button class="comment" fill="clear">
+              <ion-avatar>
+                <img src="./assets/imgs/25.jpg" />
+              </ion-avatar>
+              <span class="reply">
+                Add a reply...
+              </span>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-card class="list-card" *ngFor="let i of dummyBook">
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <ion-skeleton-text animated style="width: 40%; height: 14px; border-radius: 5px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 20%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+
+        <ion-card-content class="list-content">
+
+          <p class="ion-no-margin-top custom-font text-color-accent
+                ion-padding-start ion-padding-end">
+            <ion-skeleton-text animated style="width: 100%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 90%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 70%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+          </p>
+
+          <br>
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,197 @@
+<ion-header [ngStyle]="{ 'background':  groupData.color }">
+  <ion-toolbar class="transparent">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" color="light" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-label class="text-color-secondary text-size-md font-bold">{{groupData.name}}</ion-label>
+    <ion-buttons slot="end" (click)="presentActionSheetMenu(groupData.id, groupData.name)">
+      <ion-icon name="ellipsis-horizontal-outline" color="light" class="options"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="transparent">
+    <ion-item lines="none" class="transparent">
+      <ion-label class="text-color-secondary ion-text-wrap text-size-sm">{{groupData.description}}</ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="post-list-card" *ngFor="let item of posts">
+          <ion-item lines="none">
+            <ion-avatar slot="start" class="story-avatar" (click)="viewProfiles(item.UserId)" [ngClass]="{'seen': false}">
+              <img [src]="item.Photo">
+            </ion-avatar>
+            <ion-label class="custom-font" (click)="viewProfiles(item.UserId)">
+              {{item.Name}}
+              <span class="custom-font text-size-sd text-color-primary">posted in <span
+                  style="color: #DF236C;">{{item.groupName}}</span></span>
+              <p class="text-size-sm text-color-primary">
+                <span>{{item.Date | DateFormat | lowercase}}</span>
+              </p>
+            </ion-label>
+            <ion-buttons slot="end" *ngIf="item.UserId != currentUserId"
+              (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+              <ion-button color="medium">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end" *ngIf="item.UserId == currentUserId"
+              (click)="presentActionSheetUser(item.key, item, item.description)">
+              <ion-button color="medium">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+          <ion-card-content class="post-list-content">
+
+            <p class="ion-no-margin-top custom-font text-color-accent
+                ion-padding-start ion-padding-end">
+              {{ item.description }}
+            </p>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12" *ngIf="item.video && !item.sensitive">
+                  <video class="video" controls>
+                    <source src="{{item.video}}#t=0.1" type="video/mp4" />
+                  </video>
+                </ion-col>
+                <ion-col size="12" *ngIf="item.location && !item.sensitive">
+                  <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+                    <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+                  </agm-map>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-slides id="slider" pager="true" *ngIf="item.images && !item.sensitive" [options]="slideOptions">
+              <ion-slide *ngFor="let img of item.images" (click)="viewImage(img.src)">
+                <ion-img class="img" src="{{img.src}}"></ion-img>
+              </ion-slide>
+            </ion-slides>
+
+            <ion-grid *ngIf="item.sensitive">
+              <ion-row>
+                <ion-col size="12">
+                  <div class="sensitive ion-text-center">
+                    <ion-item lines="none" class="transparent">
+                      <ion-icon slot="end" class="help" color="light" name="help-circle-outline"></ion-icon>
+                    </ion-item>
+                    <ion-label class="text-size-xs text-color-secondary font-regular">
+                      Sensitive content
+                    </ion-label>
+                    <br>
+                    <ion-label class="text-size-sm text-color-secondary font-light">
+                      This post contains content that the author has marked as sensitive. Some people may find this
+                      emotionally triggering.
+                    </ion-label>
+                    <br>
+                    <ion-button fill="clear" class="show-post" expand="block">
+                      SHOW POST
+                    </ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+
+          <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+            <ion-buttons slot="start">
+              <ion-button color="medium" *ngIf="item.haveILiked === false">
+                <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+                <small>{{item.Score}}</small>
+              </ion-button>
+              <ion-button color="medium" *ngIf="item.haveILiked === true">
+                <ion-icon slot="start" color="app-primary" name="heart"></ion-icon>
+                <small>{{item.Score}}</small>
+              </ion-button>
+              <ion-button color="medium" (click)="goComment(item.key, item.UserId, item.commentLength)">
+                <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
+                <small>{{item.commentLength}}</small>
+              </ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button color="medium" (click)="shareSheetShare(item.description)" *ngIf="item.description != null && !item.images">
+                <ion-icon name="share-social-outline"></ion-icon>
+                <small>Share</small>
+              </ion-button>
+              <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)" *ngIf="item.description == null && item.images">
+                <ion-icon name="share-social-outline"></ion-icon>
+                <small>Share</small>
+              </ion-button>
+              <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)" *ngIf="item.description != null && item.images">
+                <ion-icon name="share-social-outline"></ion-icon>
+                <small>Share</small>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon src="./assets/svg/like.svg" slot="start" class="docIcon" *ngIf="item.haveILiked === false" (click)="likePost(item, item.key)"></ion-icon>
+            <ion-icon src="./assets/svg/like.svg" slot="start" class="docIcon" *ngIf="item.haveILiked === true" (click)="unlikePost(item, item.key)"></ion-icon>
+
+            <ion-button class="comment" fill="clear" (click)="goComment(item.key, item.UserId, item.commentLength)">
+              <ion-avatar>
+                <img [src]="myphotoURL"/>
+              </ion-avatar>
+              <span class="reply">
+                Add a reply...
+              </span>
+            </ion-button>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="post-list-card" *ngFor="let i of dummyPosts">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+              <ion-skeleton-text animated style="width: 40%; height: 14px; border-radius: 5px;"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 20%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+            </ion-label>
+          </ion-item>
+
+          <ion-card-content class="post-list-content">
+
+            <p class="ion-no-margin-top custom-font text-color-accent
+                ion-padding-start ion-padding-end">
+              <ion-skeleton-text animated style="width: 100%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 90%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 70%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+            </p>
+
+            <br>
+
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="empty-group" *ngIf="(!dummyPosts.length && !posts.length)">
+    <div style="text-align:center">
+      <img src="assets/imgs/empty_reviews.png" alt="no offers" />
+      <span style="color:#9E9E9E; font-weight:bold;">
+        No Posts Yet
+      </span>
+      <ion-button color="app-primary" fill="clear" class="createPost" (click)="createPost(groupData.id, groupData.name)">
+        Be the first to post
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>

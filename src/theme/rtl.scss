@@ -1,0 +1,259 @@
+/* SETTINGS RTL STYLE
+=======================================================
+=======================================================*/
+
+html[dir=rtl] {
+  /* SETTINGS INPUT FIELD
+      =======================================================*/
+  ion-item.input {
+    ion-icon {
+      left: 20px !important;
+      right: unset !important;
+    }
+  }
+  /* SETTINGS SWIPE
+      =======================================================*/
+  cs-swipe-to-dismiss-list-layout-1,
+  cs-swipe-to-dismiss-list-layout-2 {
+    ion-item-options {
+      margin-right: unset !important;
+      margin-left: 16px !important;
+    }
+  }
+  /* SETTINGS PARALLAX
+  =======================================================*/
+  cs-parallax-layout-1 {
+    .social {
+      right: unset !important;
+      left: 10px !important;
+    }
+  }
+
+  cs-parallax-layout-3 {
+    .ion-padding-end {
+      padding-right: 16px !important;
+    }
+
+    .slider {
+      ion-card {
+        margin: 0 0 0 8px !important;
+      }
+    }
+  }
+  /* SETTINGS GLLERY
+  =======================================================*/
+  cs-image-gallery-layout-1 {
+    .ion-no-padding-end {
+      padding-right: 16px !important;
+      padding-left: 0 !important;
+    }
+  }
+  /* SETTINGS WIZARD
+  =======================================================*/
+  cs-wizard-layout-3 {
+    .ion-text-left {
+      text-align: right !important;
+    }
+  }
+  /* SETTINGS COMMENTS WITH TIMELINE
+      =======================================================*/
+  cs-comment-layout-2 {
+    ion-item {
+      &:before {
+        left: unset;
+        right: 45px;
+      }
+    }
+  }
+  /* SETTINGS TABS
+    =======================================================*/
+  ion-tabs {
+    app-tab1 {
+      .ion-padding-end {
+        padding-right: 16px !important;
+      }
+    }
+
+    app-tab5 {
+      ion-list > ion-item::before {
+        left: auto !important;
+        right: 57px;
+      }
+    }
+  }
+  /* SETTINGS MAPS
+    =======================================================*/
+  cs-map-layout-1 {
+    .margin-half-start {
+      margin-left: 0 !important;
+      margin-right: 8px !important;
+    }
+  }
+
+  cs-map-layout-2 {
+    .ion-padding-end {
+      padding-right: 16px !important;
+    }
+
+    .slider {
+      ion-card {
+        margin: 0 0 0 8px !important;
+      }
+    }
+  }
+  /* SETTINGS QRCODE
+  =======================================================*/
+  cs-qrcode-layout-1,
+  cs-qrcode-layout-2 {
+    .ion-padding-end {
+      padding-right: 16px !important;
+    }
+  }
+  /* SETTINGS TIMELINE
+    =======================================================*/
+  cs-timeline-layout-1 {
+    ion-card {
+      width: calc(100% - 120px);
+      float: left !important;
+    }
+
+    ion-list {
+      position: relative;
+
+      &:after {
+        left: unset !important;
+        right: 55px !important;
+      }
+    }
+  }
+
+  cs-timeline-layout-2 {
+    ion-list {
+      &:after {
+        left: unset !important;
+        right: 57px !important;
+      }
+    }
+  }
+
+  cs-timeline-layout-3 {
+    ion-card {
+      margin: 10px 40px 10px 16px !important;
+
+      &:after {
+        left: unset !important;
+        right: -26px !important;
+      }
+
+      &:before {
+        left: unset !important;
+        right: -32px !important;
+      }
+
+      .card-small-block {
+        right: -14px !important;
+        left: unset !important;
+        top: 0;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 8px !important;
+        border-bottom-right-radius: 8px !important;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16) !important;
+      }
+    }
+  }
+  /* SETTINGS PROFILE
+    =======================================================*/
+  cs-profile-layout-1 {
+    .margin-half-end {
+      margin-left: 8px !important;
+      margin-right: 0 !important;
+    }
+
+    .margin-half-start {
+      margin-left: 0 !important;
+      margin-right: 8px !important;
+    }
+  }
+
+  cs-profile-layout-5 {
+    .ion-padding-end {
+      padding-right: 16px !important;
+    }
+  }
+  /* SETTINGS COMMENTS
+  =======================================================*/
+  cs-comment-layout-2 {
+    .icon-round {
+      right: unset !important;
+      left: 16px !important;
+    }
+  }
+  /* SETTINGS SEGMENT
+  =======================================================*/
+  cs-segment-layout-1 {
+    .margin-half-end {
+      margin-left: 8px !important;
+      margin-right: 0 !important;
+    }
+  }
+  /* SETTINGS ACTION-SHEET
+  =======================================================*/
+  cs-action-sheet-layout-1 {
+    .ion-padding-end {
+      padding-right: 16px !important;
+    }
+
+    .slider {
+      ion-card {
+        margin: 0 16px 0 0 !important;
+      }
+    }
+  }
+
+  cs-action-sheet-layout-2 {
+    .margin-half-end {
+      margin-left: 8px !important;
+      margin-right: 0 !important;
+    }
+  }
+  /* SETTINGS ALERT
+  =======================================================*/
+  cs-alert-layout-1 {
+    ion-card {
+      margin-left: unset !important;
+      margin-right: 16px !important;
+    }
+  }
+  /* SETTING SCCROLL SEGMENT
+  =======================================================*/
+  cs-scroll-segment-layout-4 {
+    .page1 {
+      .margin-half-end {
+        margin-left: 8px !important;
+        margin-right: 0 !important;
+      }
+
+      .margin-half-start {
+        margin-left: 0 !important;
+        margin-right: 8px !important;
+      }
+    }
+
+    .page2,
+    .page3 {
+      .ion-margin-end {
+        margin-right: 16px !important;
+      }
+    }
+  }
+
+  cs-scroll-segment-layout-3 {
+    .page2,
+    .page3 {
+      .ion-margin-end {
+        margin-right: 16px !important;
+      }
+    }
+  }
+}

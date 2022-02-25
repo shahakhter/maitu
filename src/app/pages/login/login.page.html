@@ -1,0 +1,89 @@
+<ion-content class="ion-no-padding">
+  <div class="header ion-text-center">
+    <!-- LOGO IMAGE -->
+    <img src="./assets/imgs/app_logo.png" alt="logo" />
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <!---Login button-->
+        <ion-button color="app-primary" class="login-button" expand="block" (click)="onLoginFunc()">
+          Sign-In
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="register-button" expand="block" (click)="onRegisterFunc()">
+          Registration
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-md="8" push-md="2">
+        <!---Form-->
+        <form>
+          <!---Input field email-->
+          <ion-item class="ion-no-padding transparent input" lines="none">
+            <ion-label class="text-size-xs text-color-accent font-regular ion-padding-start" position="stacked">Email
+              Address</ion-label>
+            <ion-input required type="text" placeholder="Enter email address" [(ngModel)]="item.email"
+              [ngModelOptions]="{standalone: true}">
+            </ion-input>
+            <ion-icon *ngIf="!isEmailValid" class="icon-font-sm error-color" name="alert-circle"></ion-icon>
+          </ion-item>
+          <!---Input field password-->
+          <ion-item class="ion-no-padding transparent input" lines="none">
+            <ion-label class="text-size-xs text-color-accent font-regular ion-padding-start" position="stacked">Password
+            </ion-label>
+            <ion-input required type="password" placeholder="Password" [(ngModel)]="item.password"
+              [ngModelOptions]="{standalone: true}">
+            </ion-input>
+            <ion-icon *ngIf="!isPasswordValid" class="icon-font-sm error-color" name="alert-circle"></ion-icon>
+          </ion-item>
+          <!-- Button Forgot Password -->
+          <div class="ion-text-center ion-margin-top">
+            <ion-label class="clear-button text-size-sm" (click)="onForgotPasswordFunc()">
+              Forgot password?
+            </ion-label>
+          </div>
+          <div class="clearfix"></div>
+          <ion-row class="ion-no-padding">
+            <ion-col size="12" class="ion-padding">
+              <!---Login button-->
+              <ion-button color="app-primary" class="ion-text-capitalize login-button" expand="block"
+                (click)="onLoginFunc()" [disabled]="isLogin">
+                <span *ngIf="!isLogin">LOG IN</span>
+                <ion-spinner name="circles" *ngIf="isLogin" color="light"></ion-spinner>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <!-- OR Button -->
+          <div class="ion-text-center">
+            <ion-label class="clear-button text-size-sm" (click)="onForgotPassword()">
+              OR
+            </ion-label>
+          </div>
+          <!-- Social Buttons -->
+          <div class="ion-text-center">
+            <ion-icon class="social-button" src="./assets/svg/google.svg"></ion-icon>
+            <ion-icon class="social-button" src="./assets/svg/facebook.svg"></ion-icon>
+            <ion-icon class="social-button" src="./assets/svg/twitter.svg"></ion-icon>
+          </div>
+          <!-- Don't have an account Button -->
+          <div class="ion-text-center">
+            <ion-label class="clear-button text-size-sm" (click)="onForgotPassword()">
+              Don’t have an account?
+            </ion-label>
+          </div>
+          <ion-row class="ion-no-padding">
+            <ion-col size="12" class="ion-padding">
+              <!---Login button-->
+              <ion-button color="app-light" class="ion-text-capitalize signup-button" expand="block"
+                (click)="onRegisterFunc()">
+                REGISTRATION
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

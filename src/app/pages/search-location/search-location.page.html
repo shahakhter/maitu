@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="dismiss()">
+      <ion-icon name="close-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Search Location
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar search-icon="search-sharp" [(ngModel)]="autocomplete.query" (ionInput)="updateSearch()"
+    placeholder="Search address...">
+  </ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)"
+      style="font-size: 13px; font-weight: 400;">
+      {{item}}
+    </ion-item>
+  </ion-list>
+</ion-content>

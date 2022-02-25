@@ -1,0 +1,177 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Post
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+
+  <ion-card class="post-list-card" *ngIf="item">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" (click)="viewProfiles(item.UserId)" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)">
+        {{item.Name}}
+        <span class="custom-font text-size-sm text-color-primary">&#9679; {{item.Date | DateFormat | lowercase}}</span>
+        <p class="text-size-sm text-color-primary">
+          <ion-icon name="location-outline"></ion-icon>
+          <span> {{item.city}}</span>
+        </p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="medium" (click)="presentActionSheetReport(item.Name)">
+          <ion-icon name="flag-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p *ngIf="!item.sensitive" class="ion-no-margin-top custom-font text-color-accent
+          ion-padding-start ion-padding-end">
+        {{ item.description }}
+      </p>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" *ngIf="item.video && !item.sensitive">
+            <video class="video" controls>
+              <source src="{{item.video}}#t=0.1" type="video/mp4" />
+            </video>
+          </ion-col>
+          <ion-col size="12" *ngIf="item.location && !item.sensitive">
+            <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+              <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+            </agm-map>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images && !item.sensitive" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="viewImage(img.src)">
+          <ion-img class="img" src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+      <ion-grid *ngIf="item.sensitive">
+        <ion-row>
+          <ion-col size="12">
+            <div class="sensitive ion-text-center">
+              <ion-item lines="none" class="transparent">
+                <ion-icon slot="end" class="help" color="light" name="help-circle-outline"></ion-icon>
+              </ion-item>
+              <ion-label class="text-size-xs text-color-secondary font-regular">
+                Sensitive content
+              </ion-label>
+              <br>
+              <ion-label class="text-size-sm text-color-secondary font-light">
+                This post contains content that the author has marked as sensitive. Some people may find this
+                emotionally triggering.
+              </ion-label>
+              <br>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+
+    <ion-item lines="full" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium">
+          <ion-icon slot="start" color="app-primary" name="heart"></ion-icon>
+          <small>{{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium">
+          <ion-icon slot="start" name="chatbubble-outline"></ion-icon>
+          <small>{{item.commentLength}}</small>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button color="medium" (click)="shareSheetShare(item.description)" *ngIf="item.description != null && !item.images">
+          <ion-icon name="share-social-outline"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)" *ngIf="item.description == null && item.images">
+          <ion-icon name="share-social-outline"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)" *ngIf="item.description != null && item.images">
+          <ion-icon name="share-social-outline"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+  <div class="chat-list ion-margin-top">
+    <div class="chat-item" *ngFor="let item of feedsComment">
+      <section>
+
+
+        <ion-item lines="none" class="chat-item-content ion-no-padding">
+          <div class="chat-avatar">
+            <ion-avatar class="contact-avatar">
+              <img [src]="item.photoURL">
+            </ion-avatar>
+          </div>
+
+
+          <div class="chat-item-bubble">
+            <div class="chat-body">
+              <ion-label class="text-color-follow text-size-sm font-bold ion-text-wrap"
+                (click)="viewProfiles(item.userId)">
+                {{item.displayName}}
+              </ion-label>
+              {{item.message}}
+            </div>
+          </div>
+
+          <!-- <div class="chat-item-reaction" *ngIf="msg.fromID != myuid">
+              <ion-icon name="share-outline"></ion-icon>
+            </div> -->
+        </ion-item>
+        <div class="chat-timestamp">
+          {{item.date | DateFormat | lowercase}}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <ion-item lines="none" *ngFor="let fake of fakeComments">
+    <ion-avatar slot="start">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-avatar>
+    <ion-label text-wrap>
+      <ion-skeleton-text animated
+        [ngStyle]="{'width': fake.width + 'px', 'height': fake.height + 'px', 'border-radius': '20px'}">
+      </ion-skeleton-text>
+    </ion-label>
+  </ion-item>
+
+  <div class="empty-view" *ngIf="(!fakeComments.length && !feedsComment.length)">
+    <div style="text-align:center">
+      <img src="assets/imgs/ic_nochat.png" alt="no comments" />
+      <span style="color:#9E9E9E; font-weight:bold;">
+        No Comments Yet
+      </span>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-item lines="none" class="comment-input">
+    <ion-input class="input restrict" type="text" placeholder="Write a comment..." [(ngModel)]="message"
+      class="ion-padding-start">
+    </ion-input>
+    <ion-button slot="end" class="ion-no-margin" fill="clear" (click)="send()" [disabled]="">
+      <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-footer>

@@ -1,0 +1,138 @@
+ion-toolbar {
+    .options {
+        zoom: 2;
+        margin-right: 5px;
+    }
+}
+
+
+.empty-group {
+    width: 200px;
+    margin: auto;
+    height: 200px;
+    top: 10%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+
+    img {
+        width: 100px;
+        margin: auto;
+    }
+
+    span {
+        display: block;
+        text-align: center;
+    }
+
+    .createPost {
+        text-transform: capitalize;
+    }
+
+    button {
+        margin-top: 50px;
+
+        span {
+            display: unset !important;
+        }
+    }
+}
+
+.docIcon {
+    color: #fff;
+    background-color: #df236c;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 15px;
+    box-shadow: 0 10px 30px 0px rgb(250, 161, 197);
+}
+
+.post-list-card {
+    margin-top: var(--ion-margin, 10px);
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px 0px rgba(57, 71, 82, 0.12);
+
+    &:last-child {
+        margin-bottom: var(--ion-margin, 32px);
+    }
+
+    ion-item {
+        --inner-padding-end: 0px;
+    }
+
+    .post-list-content {
+        padding: 0 !important;
+        text-align: left;
+
+        .img {
+            margin: 10px;
+            border-radius: 12px !important;
+            overflow: hidden;
+        }
+    }
+
+    .action-item {
+        .action-button {
+            margin-right: var(--ion-margin, 16px) !important;
+        }
+    }
+}
+
+.sensitive {
+    background: #9c8679;
+    color: #ffffff;
+    height: 200px;
+    width: 100%;
+    border-radius: 12px;
+
+    .help {
+        margin-right: 10px;
+    }
+
+    .show-post {
+        border: 1px solid #ffffff !important;
+        border-radius: 20px !important;
+        color: #ffffff;
+        margin: 10px;
+    }
+}
+
+.comment {
+    border: 1px solid #969695 !important;
+    border-radius: 20px !important;
+    text-transform: none;
+    height: 45px;
+    width: 100%;
+    margin-right: 10px;
+
+    ion-avatar {
+        margin-right: 10px;
+        height: 35px;
+        width: 35px;
+    }
+
+    .reply {
+        margin-right: auto;
+        color: #969695;
+    }
+}
+
+agm-map {
+    border-radius: 12px;
+    display: inline-block;
+    overflow: hidden;
+    height: 200px !important;
+    width: 100%; /* This is really important*/
+}
+
+.video {
+    height: 200px;
+    width: 100%;
+    // margin: 10px;
+    border-radius: 12px;
+}

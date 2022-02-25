@@ -1,0 +1,32 @@
+<ion-tabs #tabs>
+
+  <ion-tab-bar slot="bottom" color="app-light">
+    <ion-tab-button tab="tab1" (click)="changeIcon('home')">
+      <ion-icon [hidden]="activeHome" src="./assets/svg/slide.svg"></ion-icon>
+      <ion-icon [hidden]="!activeHome" src="./assets/svg/slide-active.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2" (click)="changeIcon('chats')">
+      <ion-icon [hidden]="activeChats" src="./assets/svg/chat.svg"></ion-icon>
+      <ion-icon [hidden]="!activeChats" src="./assets/svg/chat-active.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3" (click)="changeIcon('profile')">
+      <ion-icon [hidden]="activeProfile" src="./assets/svg/user.svg"></ion-icon>
+      <ion-icon [hidden]="!activeProfile" src="./assets/svg/user-active.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="changeIcon('signal')">
+      <ion-icon [hidden]="activeSignal" src="./assets/svg/signal.svg"></ion-icon>
+      <ion-icon [hidden]="!activeSignal" src="./assets/svg/signal-active.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notifications" (click)="changeIcon('')" class="button">
+      <ion-icon src="./assets/svg/bell.svg"></ion-icon>
+      <ion-badge mode="ios" *ngIf="notifyItems.length > 0" [class.ion-badge-one]="notifyItems.length < 10" [class.ion-badge-two]="notifyItems.length >= 10" color="app-primary">
+        {{notifyItems.length}}
+      </ion-badge>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

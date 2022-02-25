@@ -1,0 +1,100 @@
+.toolbar {
+    border-bottom: 1px solid #e1e2e3;
+
+    .options {
+        zoom: 2;
+    }
+}
+
+.docIcon {
+    color: #fff;
+    padding: 5px;
+    border-radius: 7px;
+    margin-right: 15px;
+}
+
+.save {
+    --border-radius: 6px !important;
+    text-transform: capitalize;
+}
+
+form {
+    ion-item {
+        --background: #f3f3f4 !important;
+        --padding-end: 8px;
+        --padding-start: 8px;
+        margin: 16px 10px !important;
+        width: calc(100% - 22px);
+        border-radius: 4px !important;
+
+        ion-input {
+            // --padding-bottom: 16px;
+            // --padding-end: 32px;
+            --padding-start: 16px;
+            // --padding-top: 16px;
+            // margin: 10px 0px !important;
+            // width: calc(100% - 22px);
+            // box-shadow: 0 3px 13px rgba(0, 0, 0, 0.16);
+        }
+
+        ion-select {
+            width: 100%;
+            color: #000000 !important;
+            --placeholder-color: #969695;
+            --placeholder-opacity: 1;
+        }
+
+        .error-icon {
+            position: absolute;
+            right: 0px;
+            bottom: 15px;
+            z-index: 999;
+        }
+
+        ion-label {
+            transform: none;
+            margin: 5px 0 0 0 !important;
+        }
+    }
+
+    .dob {
+        // --background: #f3f3f4 !important;
+        // --padding-end: 0px;
+        --padding-start: 16px;
+        // margin: 10px 5px !important;
+        // width: calc(100% - 14px);
+        // border-radius: 20px !important;
+    }
+
+    ion-select::part(icon) {
+        opacity: 1;
+        margin-left: 1em;
+        color: transparent;
+        background: url("chevron-down-outline.svg") no-repeat center;
+    }
+}
+
+.profile-section {
+    position: relative;
+    width: 100px;
+    margin: auto;
+
+    ion-avatar {
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.edit-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #cecece;
+    border: 1px solid white;
+    outline: none;
+    color: white;
+}

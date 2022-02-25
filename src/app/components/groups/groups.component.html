@@ -1,0 +1,18 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-card class="groups-list-card" *ngFor="let group of groups | filter:term" [ngStyle]="{ 'background':  group.color }" (click)="goGroupDetails(group)">
+        <ion-card-content>
+          <h1 class="text-color-secondary text-size-md">
+            {{group.name}}
+          </h1>
+          <p class="text-color-secondary">
+            {{group.description}}
+          </p>
+          <br>
+          <span class="text-color-secondary text-size-sm"> {{group.total_members}} members</span>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

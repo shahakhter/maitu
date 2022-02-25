@@ -1,0 +1,16 @@
+.toolbar {
+  border-bottom: 1px solid #e1e2e3;
+
+  .options {
+    zoom: 2;
+  }
+}
+
+.share {
+  --border-radius: 6px !important;
+}
+
+agm-map {
+  height: 100% !important;
+  width: 100%; /* This is really important*/
+}

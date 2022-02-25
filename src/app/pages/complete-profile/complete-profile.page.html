@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-item>
+      <ion-label>
+        <span class="text-size-xs font-bold">Complete profile</span>
+        <p class="text-size-sd ion-text-wrap">Your provided information will really help you in finding friends & moms
+          nearby you.</p>
+      </ion-label>
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" class="save" color="app-primary" (click)="saveProfile()"
+        [disabled]="!about || !gender || !location || !city || !marital || !education">
+        Done
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="8" push-md="2">
+        <form>
+          <ion-col size="12">
+            <ion-label class="text-size-sm text-color-accent ion-padding-start font-regular" position="stacked">
+              Profile Picture
+            </ion-label>
+            <div class="profile-section ion-text-center">
+              <ion-avatar>
+                <img *ngIf="photoURL" [src]="photoURL" alt="">
+                <img *ngIf="!photoURL" src="./assets/imgs/avatar.png" alt="">
+              </ion-avatar>
+              <button class="edit-button" (click)="presentImageSheet()">
+                <ion-icon style="zoom: 1.5" name="camera" color="dark"></ion-icon>
+              </button>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="transparent">
+              <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Bio</ion-label>
+              <ion-input required type="text" placeholder="Entery your bio" [(ngModel)]="about"
+                [ngModelOptions]="{standalone: true}">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="transparent">
+              <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Gender</ion-label>
+              <ion-select [(ngModel)]="gender" class="dob" placeholder="Select your gender"
+                [ngModelOptions]="{standalone: true}">
+                <ion-select-option value="Female">Female</ion-select-option>
+                <ion-select-option value="Male">Male</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="transparent">
+              <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Location</ion-label>
+              <ion-input required type="text" placeholder="Select your location" [(ngModel)]="location"
+                [ngModelOptions]="{standalone: true}" (click)="shareLocation()">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="transparent">
+              <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Marital Status</ion-label>
+              <ion-select [(ngModel)]="marital" class="dob" placeholder="Select your marital status" [ngModelOptions]="{standalone: true}">
+                <ion-select-option value="Married">Married</ion-select-option>
+                <ion-select-option value="In Relationship">In Relationship</ion-select-option>
+                <ion-select-option value="Single">Single</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding" *ngIf="marital === 'Married'">
+            <ion-item class="transparent">
+              <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Do you have childs?
+              </ion-label>
+              <ion-select [(ngModel)]="isChilds" class="dob" [ngModelOptions]="{standalone: true}">
+                <ion-select-option value="yes">Yes</ion-select-option>
+                <ion-select-option value="no">No</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <section *ngIf="isChilds === 'yes' && marital === 'Married'">
+
+            <ion-col size="12" class="ion-no-padding">
+              <ion-item class="transparent">
+                <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Boy / Girl</ion-label>
+                <ion-select [(ngModel)]="childGender" class="dob" placeholder="Select child gender" [ngModelOptions]="{standalone: true}"
+                  (ionChange)="selectionChange($event)">
+                  <ion-select-option value="Boy">Boy</ion-select-option>
+                  <ion-select-option value="Girl">Girl</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12" class="ion-no-padding">
+              <ion-item class="transparent">
+                <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Name</ion-label>
+                <ion-input required type="text" placeholder="Enter child name" [(ngModel)]="childName"
+                  [ngModelOptions]="{standalone: true}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12" class="ion-no-padding">
+              <ion-item class="transparent">
+                <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Age</ion-label>
+                <ion-input required type="text" placeholder="Enter child age" [(ngModel)]="childAge"
+                  [ngModelOptions]="{standalone: true}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-row class="ion-no-padding ion-text-center"> 
+            <ion-col size="12" class="ion-no-padding align-items-center">
+              <ion-button shape="round" style="text-transform: none;" fill="outline"
+                (click)="addMore()" [disabled]="!childGender || !childName || !childAge">Add More</ion-button>
+            </ion-col>
+            </ion-row>
+          </section>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="transparent">
+              <ion-label class="text-size-sm text-color-accent font-regular" position="stacked">Education</ion-label>
+              <ion-input required type="text" placeholder="Enter your education" [(ngModel)]="education"
+                [ngModelOptions]="{standalone: true}">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

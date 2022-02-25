@@ -1,0 +1,68 @@
+.toolbar {
+    border-bottom: 1px solid #e1e2e3;
+
+    .options {
+        zoom: 2;
+    }
+}
+
+.post {
+    --border-radius: 6px !important;
+}
+
+.input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+agm-map {
+    border-radius: 12px;
+    display: inline-block;
+    overflow: hidden;
+    height: 300px !important;
+    width: 100%; /* This is really important*/
+}
+
+.video {
+    height: 200px;
+    width: 100%;
+    // margin: 10px;
+    border-radius: 12px;
+}
+
+.dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 80vw;
+    font-weight: 200;
+    height: 300px;
+    border: 2px dashed #f16624;
+    border-radius: 5px;
+    background: white;
+    margin: 10px 0;
+
+    &.hovering {
+        border: 2px solid #f16624;
+        color: #dadada !important;
+    }
+
+    .file-label {
+        font-size: 1.2em;
+    }
+}
+
+progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+}
+
+.errors {
+    font-size: 10px;
+    color: #fff;
+    background: #ef473a;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

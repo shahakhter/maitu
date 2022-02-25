@@ -1,0 +1,8 @@
+{
+  "name": "instagram-clone",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

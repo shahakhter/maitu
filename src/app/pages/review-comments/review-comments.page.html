@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Comments
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+
+  <div class="chat-list ion-margin-top">
+    <div class="chat-item" *ngFor="let item of feedsComment">
+      <section>
+
+
+        <ion-item lines="none" class="chat-item-content ion-no-padding">
+          <div class="chat-avatar">
+            <ion-avatar class="contact-avatar">
+              <img [src]="item.photoURL">
+            </ion-avatar>
+          </div>
+
+
+          <div class="chat-item-bubble">
+            <div class="chat-body">
+              <ion-label class="text-color-follow text-size-sm font-bold ion-text-wrap"
+                (click)="viewProfiles(item.userId)">
+                {{item.displayName}}
+              </ion-label>
+              {{item.message}}
+            </div>
+          </div>
+
+          <!-- <div class="chat-item-reaction" *ngIf="msg.fromID != myuid">
+              <ion-icon name="share-outline"></ion-icon>
+            </div> -->
+        </ion-item>
+        <div class="chat-timestamp">
+          {{item.date | DateFormat | lowercase}}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <ion-item lines="none" *ngFor="let fake of fakeComments">
+    <ion-avatar slot="start">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-avatar>
+    <ion-label text-wrap>
+      <ion-skeleton-text animated
+        [ngStyle]="{'width': fake.width + 'px', 'height': fake.height + 'px', 'border-radius': '20px'}">
+      </ion-skeleton-text>
+    </ion-label>
+  </ion-item>
+
+  <div class="empty-view" *ngIf="(!fakeComments.length && !feedsComment.length)">
+    <div style="text-align:center">
+      <img src="assets/imgs/ic_nochat.png" alt="no comments" />
+      <span style="color:#9E9E9E; font-weight:bold;">
+        No Comments Yet
+      </span>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-item lines="none" class="comment-input">
+    <ion-input class="input restrict" type="text" placeholder="Write a comment..." [(ngModel)]="message"
+      class="ion-padding-start">
+    </ion-input>
+    <ion-button slot="end" class="ion-no-margin" fill="clear" (click)="send()" [disabled]="">
+      <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-footer>

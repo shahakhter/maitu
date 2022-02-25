@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+          <ion-item *ngFor="let item of notificationList?.slice().reverse()" [class.unread]="item.read === false"
+            [class.read]="item.read === true">
+            <!--Avatar-->
+            <!-- <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}" (click)="view(item)">
+              <img [src]="item.photoURL">
+            </ion-avatar> -->
+            <div class="profile-section" slot="start">
+              <ion-avatar>
+                <ion-img src="{{item.photoURL}}" alt=""></ion-img>
+              </ion-avatar>
+              <button class="edit-button">
+                <ion-icon *ngIf="item.typer === 'comment'" name="chatbox" color="light"></ion-icon>
+                <ion-icon *ngIf="item.typer === 'like'" name="heart" color="light"></ion-icon>
+                <ion-icon *ngIf="item.typer === 'follow'" name="person-add" color="light"></ion-icon>
+                <ion-icon *ngIf="item.typer === 'chat'" name="chatbubbles" color="light"></ion-icon>
+              </button>
+            </div>
+            <ion-label (click)="view(item)">
+              <!--Title-->
+              <!-- <h2 class="text-size-xs  font-bold">
+                {{item.displayName}}</h2> -->
+              <p *ngIf="item.type === 'feed'" class="ion-text-wrap text-size-sm text-color-accent">
+                <span class="font-bold">{{item.displayName}}</span>
+                commented on your post.
+              </p>
+              
+              <p *ngIf="item.type === 'chat'" class="ion-text-wrap text-size-sm text-color-accent">
+                <span class="font-bold">{{item.displayName}}</span>
+                sent you a message.
+              </p>
+
+              <p *ngIf="item.type === 'follow'" class="ion-text-wrap text-size-sm text-color-accent">
+                <span class="font-bold">{{item.displayName}}</span>
+                followed you.
+              </p>
+              <p *ngIf="item.type === 'followback'" class="ion-text-wrap text-size-sm text-color-accent">
+                <span class="font-bold">{{item.displayName}}</span>
+                followed back with you.</p>
+              <p *ngIf="item.type === 'feed-like'" class="ion-text-wrap text-size-sm text-color-accent">
+                <span class="font-bold">{{item.displayName}}</span>
+                like your post.</p>
+              <p *ngIf="item.type === 'photo-like'" class="ion-text-wrap text-size-sm text-color-accent">
+                <span class="font-bold">{{item.displayName}}</span>
+                like your photo.</p>
+              <h3 class="text-size-sd text-color-primary font-regular">
+                {{item.time | DateFormat | lowercase}}</h3>
+              <!-- <div *ngIf="item.typer === 'follow'">
+                <ion-row class="ion-no-padding">
+                  <ion-col>
+                    <ion-button (click)="followBack(item.postId, item)" expand="block" style="text-transform: none;">
+                      Follow Back</ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button (click)="ignoreBack(item.postId, item)" expand="block" fill="outline"
+                      style="text-transform: none;">Ignore</ion-button>
+                  </ion-col>
+                </ion-row>
+              </div> -->
+            </ion-label>
+            <!-- <div slot="end">
+              <ion-button fill="clear" *ngIf="item.typer === 'comment'" (click)="view(item)">
+                <ion-icon name="chatbox" color="primary"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" *ngIf="item.typer === 'like'" (click)="view(item)">
+                <ion-icon name="thumbs-up" color="primary"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" (click)="actions(item.id, item)" *ngIf="item.read === false">
+                <ion-icon name="ellipsis-vertical" color="primary"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" (click)="action(item.id, item)" *ngIf="item.read === true">
+                <ion-icon name="ellipsis-vertical" color="primary"></ion-icon>
+              </ion-button>
+            </div> -->
+            <ion-buttons slot="end">
+              <ion-button color="medium" (click)="actionUnseen(item.id, item)" *ngIf="item.read === false && item.typer != 'follow'">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+              <ion-button color="medium" (click)="actionSeen(item.id, item)" *ngIf="item.read === true && item.typer != 'follow'">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+              <ion-button color="medium" (click)="actionUnseenFollow(item.id, item)" *ngIf="item.read === false && item.typer === 'follow'">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+              <ion-button color="medium" (click)="actionSeenFollow(item.id, item)" *ngIf="item.read === true && item.typer === 'follow'">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-list>
+
+        <section *ngIf="notificationList.length === 0">
+          <div *ngFor="let item of dummyNotifications">
+            <ion-list lines="none">
+              <ion-item>
+                <ion-avatar slot="start">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-avatar>
+                <ion-label>
+                  <p>
+                    <ion-skeleton-text animated style="width: 80%; height: 13px; border-radius: 4px;"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width: 50%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+                  </p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </section>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="empty-notices" *ngIf="(!dummyNotifications.length && !notificationList.length)">
+    <div style="text-align:center">
+      <img src="assets/imgs/empty_notification.png" alt="no offers" />
+      <span style="color:#9E9E9E; font-weight:bold;">
+        No Notifications Yet
+      </span>
+    </div>
+  </div>
+
+</ion-content>
