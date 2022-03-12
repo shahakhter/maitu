@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="dismiss()">
+      <ion-icon name="chevron-back-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-item lines="none">
+      <ion-label>
+        <span class="text-size-xs font-bold">Your Location</span>
+        <p class="text-size-sd ion-text-wrap">You can move Marker to change location.</p>
+      </ion-label>
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" class="default-button share" color="app-primary" (click)="share()" [disabled]="!locationCoords">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <agm-map [latitude]="locationCoords.latitude" [longitude]="locationCoords.longitude" [zoom]="zoom">
+    <agm-marker [latitude]="locationCoords.latitude" [longitude]="locationCoords.longitude" [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"></agm-marker>
+  </agm-map>
+
+</ion-content>

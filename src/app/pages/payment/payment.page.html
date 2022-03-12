@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="app-primary">
+    <ion-title>Connections await</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <div class="header ion-text-center">
+    <!-- LOGO IMAGE -->
+    <img src="./assets/imgs/app_logo.png" alt="logo" />
+  </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-radio-group [(ngModel)]="amount">
+              <ion-item lines="none">
+                <ion-radio color="success" slot="start" mode="md" value="4.38"></ion-radio>
+                <ion-label class="text-size-sm">Get 1 month subscription at KSH 500</ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-radio color="success" slot="start" mode="md" value="13.13"></ion-radio>
+                <ion-label class="text-size-sm">Get 6 month subscription at KSH 1500</ion-label>
+              </ion-item>
+            </ion-radio-group>
+          </ion-col>
+          <ion-col size="12" class="ion-margin-top">
+            <ion-button expand="block" shape="round" class="paypalBtn" id="paypal-container">
+              <ion-spinner name="circles" *ngIf="isProcessing" color="light"></ion-spinner>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

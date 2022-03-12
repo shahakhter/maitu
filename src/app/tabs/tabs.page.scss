@@ -1,0 +1,31 @@
+.button {
+    .ion-badge-one {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 0.6em;
+        --padding-start: 5px;
+        --padding-end: 5px;
+        font-weight: lighter;
+        box-shadow: 0 4px 20px 0px rgb(233, 10, 42);
+
+        & ~ ion-icon {
+            margin-right: 1.2rem;
+        }
+    }
+
+    .ion-badge-two {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 0.6em;
+        --padding-start: 3px;
+        --padding-end: 3px;
+        font-weight: lighter;
+        box-shadow: 0 4px 20px 0px rgb(233, 10, 42);
+
+        & ~ ion-icon {
+            margin-right: 1.2rem;
+        }
+    }
+}

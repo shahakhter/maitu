@@ -1,0 +1,35 @@
+
+<ion-content fullscreen="true">
+  <ion-slides [options]="sliderOpts">
+    <ion-slide>
+      <div class="swiper-zoom-container">
+        <img src="{{img}}"/>
+        <ion-buttons slot="end" class="btnMore">
+          <ion-button (click)="shareSheetShares()" fill="clear" color="light" style="text-transform: none;">
+            <ion-icon slot="icon-only" name="arrow-redo-circle-outline" color="light" slot="start"></ion-icon>
+            Share
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="zoom(false)" fill="clear" color="primary">
+        <ion-icon name="remove" slot="start" color="primary"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="zoom(true)" fill="clear" color="primary">
+        <ion-icon name="add" slot="start" color="primary"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="close()" fill="clear" color="primary">
+        <ion-icon name="close" slot="start" color="primary"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

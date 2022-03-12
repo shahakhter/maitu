@@ -1,0 +1,106 @@
+.toolbar {
+  border-bottom: 1px solid #e1e2e3;
+
+  .options {
+    zoom: 2;
+  }
+}
+
+ion-searchbar {
+  --box-shadow: none;
+  --background: #f3f3f3 !important;
+  --border-radius: 1.2rem;
+  --placeholder-opacity: 0.2;
+
+  padding-bottom: 5px;
+}
+
+.line {
+  width: 100%;
+  border-bottom: 10px solid #f4f4f5;
+}
+
+.sliderBook {
+  overflow-x: scroll;
+  display: -webkit-inline-box;
+  display: flex;
+  flex-direction: row;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  ion-avatar {
+    margin-left: 10px;
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.chat-avatar {
+  height: 45px;
+  width: 45px;
+}
+
+.unread {
+  color: #DF236C;
+}
+
+.empty-item {
+  --min-height: 200px;
+  margin-top: 30px;
+}
+
+.empty-inbox {
+  width: 200px;
+  margin: auto;
+  height: 200px;
+  top: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  img {
+      width: 100px;
+      margin: auto;
+  }
+
+  span {
+      display: block;
+      text-align: center;
+  }
+
+  button {
+      margin-top: 50px;
+
+      span {
+          display: unset !important;
+      }
+  }
+}
+
+.empty-contacts-list {
+
+  height: 300px;
+  
+  .empty-contacts {
+    width: 200px;
+    margin: auto;
+    height: 200px;
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    img {
+        width: 100px;
+        margin: auto;
+    }
+  
+    span {
+        display: block;
+        text-align: center;
+    }
+  }
+}

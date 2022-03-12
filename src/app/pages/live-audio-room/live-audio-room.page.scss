@@ -1,0 +1,117 @@
+ion-toolbar {
+    --background: #000000;
+
+    .options {
+        zoom: 2;
+        margin-right: 5px;
+    }
+}
+
+ion-content {
+    --background: #000000;
+}
+
+.profile-section {
+    position: relative;
+    width: 80px;
+    margin: auto;
+    // background: yellow;
+
+    ion-avatar {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.edit-button {
+    position: absolute;
+    right: 8px;
+    bottom: 10px;
+    height: 29px;
+    width: 29px;
+    border-radius: 50%;
+    background-color: #c2b59b;
+    border: 1px solid white;
+    outline: none;
+
+    ion-icon {
+        zoom: 1.2;
+    }
+}
+
+ion-footer {
+    --background: #3a3a3c !important;
+    background: #3a3a3c !important;
+    padding: 5px;
+
+    .footer-button {
+        background: #939598;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin: 3px;
+        outline: none;
+        
+        .footer-icon {
+            zoom: 2;
+        }
+    }
+
+    .joined-button {
+        background: #f8b2b6;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin: 3px;
+        outline: none;
+        
+        .footer-icon {
+            zoom: 2;
+        }
+    }
+
+    .talk-button {
+        --background: #f8b2b6 !important;
+        --border-radius: 22px;
+        --box-shadow: none;
+        height: 40px;
+
+        ion-label {
+            color: #000000;
+        }
+
+        .footer-icon {
+            zoom: 1.5;
+        }
+    }
+}
+
+.empty-users {
+    width: 200px;
+    margin: auto;
+    height: 200px;
+    top: 10%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+
+    img {
+        width: 100px;
+        margin: auto;
+    }
+
+    span {
+        display: block;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 50px;
+
+        span {
+            display: unset !important;
+        }
+    }
+}

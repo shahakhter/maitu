@@ -1,0 +1,15 @@
+.toolbar {
+    border-bottom: 1px solid #e1e2e3;
+
+    .options {
+        zoom: 2;
+    }
+}
+
+ion-searchbar {
+    --box-shadow: none;
+    --background: #f3f3f3 !important;
+    --border-radius: 1.2rem;
+    --placeholder-opacity: 0.2;
+    padding-bottom: 5px;
+}

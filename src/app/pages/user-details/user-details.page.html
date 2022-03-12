@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Profile
+    </ion-title>
+    <ion-buttons slot="end" (click)="reportUser(users.displayName)">
+      <ion-icon name="flag-outline" class="report"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <!-- Card with avatar -->
+        <ion-card class="ion-padding ion-text-center ion-no-margin
+        no-border-radius no-box-shadow info-section profilesec"
+          style="border: 2px solid white; margin: 5px; border-radius: 10px;">
+          <ion-avatar class="profile" (click)="viewImage(users.photoURL)">
+            <img src="{{users.photoURL}}" alt="" (click)="viewImage(users.photoURL)">
+          </ion-avatar>
+          <!--<input id="file" type='file' style="display: none;"(change)="onSelectFile($event)" />-->
+
+          <ion-card-content class="ion-text-center ion-no-padding">
+            <!-- Avatar title and subtitle -->
+            <h1 class="text-size-md text-color-secondary font-bold">
+              {{users.displayName}}</h1>
+
+            <ion-badge color="success" *ngIf="users.verified">
+              <img src="assets/checked.png"
+                style="width: 17px; height: 17px; margin-right: 3px; display: inline-block; vertical-align: middle;" />
+              <ion-label style="display: inline-block; vertical-align: middle;"> Verified </ion-label>
+            </ion-badge>
+            <!--<p class="text-size-xs text-color-secondary font-regular">
+              {{descriptio}}</p>-->
+            <p *ngIf="users.status == 'online'" style="color: #B5EAD6; font-weight: bold;text-align: center;">Online</p>
+            <p *ngIf="users.status == 'offline'" style="color: red; font-weight: bold;text-align: center;">Offline</p>
+            <p *ngIf="users.status == 'away'" style="color: orange; font-weight: bold;text-align: center;">Away</p>
+
+
+            <ion-item lines="none" class="transparent ion-no-padding" (click)="goFollowers(users.displayName)">
+              <ion-label class="ion-text-center">
+                <h2 class="text-size-sm text-color-secondary font-regular">
+                    {{users.followingCount}} Connections
+                </h2>
+              </ion-label>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="app-primary" class="login-button" expand="block" *ngIf="!isFollowing"
+          (click)="addToFevrt(users.$key, users.followersCount, users.displayName)">Follow</ion-button>
+        <ion-button color="app-primary" class="login-button" expand="block" *ngIf="isFollowing"
+          (click)="removeFevrt(users.$key, users.followersCount, users.displayName)">Unfollow</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="register-button" expand="block" (click)="chatWithUser(users.displayName, users.$key)">Message
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <super-tabs [config]="{ debug: true, nativeSmoothScroll: true }">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label>
+          About
+        </ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>
+          Photos
+        </ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab> -->
+        <ion-list>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngIf="users.displayName">
+            <ion-icon name="person" slot="start" class="docIcon" style="background-color: #FF9AA2;"></ion-icon>
+            <ion-label>
+              <h3><b>{{users.displayName}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngIf="users.gender">
+            <ion-icon name="female-outline" slot="start" class="docIcon" style="background-color: #C7CEEA;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="users.gender"><b>{{users.gender}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngIf="users.location">
+            <ion-icon name="globe" slot="start" class="docIcon" style="background-color: #FFDAC0;;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="users.location"><b>{{users.location}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngIf="users.marital">
+            <ion-icon name="people" slot="start" class="docIcon" style="background-color: #FEB7B1;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="users.marital"><b>{{users.marital}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngIf="users.education">
+            <ion-icon name="list" slot="start" class="docIcon" style="background-color: #C7CEEA;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="users.education"><b>{{users.education}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngIf="users.dob">
+            <ion-icon name="calendar" slot="start" class="docIcon" style="background-color: #FF9AA2;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="users.dob"><b>{{users.dob | date}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" style="margin-bottom: 0px;" *ngIf="users.childs?.length">
+            <ion-label style="font-weight: bold;">
+              Children
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-margin-bottom" *ngFor="let item of users.childs">
+            <ion-icon *ngIf="item.childGender === 'Boy'" src="./assets/svg/boy.svg" slot="start" class="docIcon" style="background-color: #C7CEEA;"></ion-icon>
+            <ion-icon *ngIf="item.childGender === 'Girl'" src="./assets/svg/girl.svg" slot="start" class="docIcon" style="background-color: #FEB7B1;;"></ion-icon>
+            <ion-label>
+              <h3><b>{{item.childName}}, {{item.childAge}}</b></h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      <!-- </super-tab>
+      <super-tab>
+        <ion-grid>
+          <ion-row class="ion-no-padding">
+            <ion-col size="6" class="ion-no-padding" *ngFor="let item of feedPhoto"
+              (click)="viewImage(item.image)">
+              <div class="square-grid" [ngStyle]="{'background-image': 'url('+item.image+')'}">
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs> -->
+</ion-content>

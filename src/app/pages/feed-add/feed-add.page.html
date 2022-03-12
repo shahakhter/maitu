@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-title>Create post</ion-title>
+    <ion-buttons slot="end">
+      <ion-button disabled color="light" fill="solid" class="post"
+        [hidden]="name && description || description || url || imageResponse.length > 0 || location || latitude || longitude">
+        Post
+      </ion-button>
+      <ion-button disabled color="light" fill="solid" class="post"
+        *ngIf="isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedTextOnly()"
+        *ngIf="description && !url && imageResponse.length === 0 && !location && !latitude && !longitude && !isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedImageOnly()"
+        *ngIf="!description && !url  && imageResponse.length > 0 && !location && !latitude && !longitude && !isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedTextImage()"
+        *ngIf="description && !url  && imageResponse.length > 0 && !location && !latitude && !longitude && !isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedTextVideo()"
+        *ngIf="description && url  && imageResponse.length === 0 && !location && !latitude && !longitude && !isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedVideo()"
+        *ngIf="!description && url  && imageResponse.length === 0 && !location && !latitude && !longitude && !isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedLocation()"
+        *ngIf="!description && !url  && imageResponse.length === 0 && location && latitude && longitude && !isBanned">
+        Post
+      </ion-button>
+      <ion-button fill="solid" class="post" color="app-primary" (click)="addFeedTextLocation()"
+        *ngIf="description && !url  && imageResponse.length === 0 && location && latitude && longitude && !isBanned">
+        Post
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item lines="none" *ngIf="photo && name">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="photo">
+      </ion-avatar>
+      <ion-label class="custom-font">
+        {{name}}
+        <p class="text-size-sm text-color-primary">
+          <span>Mark as sensitive content</span>
+        </p>
+      </ion-label>
+      <ion-checkbox slot="end" color="app-primary" [(ngModel)]="isSensitive"></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!photo && !name">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 14px; border-radius: 5px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%; height: 10px; border-radius: 3px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+
+    <div class="errors" *ngIf="isBanned">
+      <span>Warning ! Don't use illegal or abusive words in your post.</span>
+    </div>
+    <ion-item class="transparent input box-shadow border-radius" lines="none">
+      <ion-textarea rows="8" cols="1" placeholder="What's on your mind ?" [(ngModel)]="description" (ionInput)="getMatch($event)"></ion-textarea>
+    </ion-item>
+
+    <ion-grid *ngIf="imageResponse.length > 0">
+      <ion-row>
+        <ion-col size="4" *ngFor="let image of imageResponse">
+          <ion-icon name="close" (click)="removePhoto(image)" style="float: right;"></ion-icon>
+          <img [src]="image.src" height="150" width="100" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngIf="format==='video' && url">
+          <ion-icon name="close" style="float: right;" (click)="removeVideo()"></ion-icon>
+          <video [src]="url" *ngIf="format==='video' && url" class="video" controls></video>
+        </ion-col>
+        <ion-col size="12" *ngIf="location">
+          <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false"></agm-marker>
+          </agm-map>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+    <ion-list lines="full">
+
+      <ion-item (click)="presentImageSheet()">
+        <ion-icon name="images" style="color: green;" slot="start"></ion-icon>
+        <ion-label>
+          <h6>Add Photos</h6>
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="onTrigger()">
+        <input id="filevideo" type='file' style="display: none;" (change)="onSelectFile($event)" />
+        <ion-icon name="videocam" style="color: red;" slot="start"></ion-icon>
+        <ion-label>
+          <h6>Add Video</h6>
+        </ion-label>
+      </ion-item>
+
+      <ion-item (click)="shareLocation()">
+        <ion-icon name="location" style="color: purple;" slot="start"></ion-icon>
+        <ion-label>
+          <h6>Share Location</h6>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+</ion-content>

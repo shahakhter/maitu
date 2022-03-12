@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="app-primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon size="large" color="light" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-label class="text-color-secondary text-size-xs">Create your account.</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="8" push-md="2">
+        <!---Form-->
+        <form>
+          <!---Input fields-->
+          <ion-row class="ion-no-padding">
+            <ion-col size="6" class="ion-no-padding">
+              <ion-item class="ion-no-padding transparent input" lines="none">
+                <ion-input required type="text" placeholder="First Name" [(ngModel)]="item.firstName"
+                  [ngModelOptions]="{standalone: true}">
+                </ion-input>
+                <ion-icon *ngIf="!isFirstNameValid" class="icon-font-sm error-color error-icon" name="alert-circle">
+                </ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" class="ion-no-padding">
+              <ion-item class="ion-no-padding transparent input" lines="none">
+                <ion-input required type="text" placeholder="Last Name" [(ngModel)]="item.lastName"
+                  [ngModelOptions]="{standalone: true}">
+                </ion-input>
+                <ion-icon *ngIf="!isLastNameValid" class="icon-font-sm error-color error-icon" name="alert-circle">
+                </ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="12">
+              <ion-label class="birthday">Birthday</ion-label>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row class="ion-no-padding">
+            <ion-col size="4" class="ion-no-padding">
+              <ion-item class="ion-no-padding transparent input dob" lines="none">
+                <ion-select [(ngModel)]="item.day" [ngModelOptions]="{standalone: true}">
+                  <ion-select-option value="01">01</ion-select-option>
+                  <ion-select-option value="02">02</ion-select-option>
+                  <ion-select-option value="03">03</ion-select-option>
+                  <ion-select-option value="04">04</ion-select-option>
+                  <ion-select-option value="05">05</ion-select-option>
+                  <ion-select-option value="06">06</ion-select-option>
+                  <ion-select-option value="07">07</ion-select-option>
+                  <ion-select-option value="08">08</ion-select-option>
+                  <ion-select-option value="09">09</ion-select-option>
+                  <ion-select-option value="10">10</ion-select-option>
+                  <ion-select-option value="11">11</ion-select-option>
+                  <ion-select-option value="12">12</ion-select-option>
+                  <ion-select-option value="13">13</ion-select-option>
+                  <ion-select-option value="14">14</ion-select-option>
+                  <ion-select-option value="15">15</ion-select-option>
+                  <ion-select-option value="16">16</ion-select-option>
+                  <ion-select-option value="17">17</ion-select-option>
+                  <ion-select-option value="18">18</ion-select-option>
+                  <ion-select-option value="19">19</ion-select-option>
+                  <ion-select-option value="20">20</ion-select-option>
+                  <ion-select-option value="21">21</ion-select-option>
+                  <ion-select-option value="22">22</ion-select-option>
+                  <ion-select-option value="23">23</ion-select-option>
+                  <ion-select-option value="24">24</ion-select-option>
+                  <ion-select-option value="25">25</ion-select-option>
+                  <ion-select-option value="26">26</ion-select-option>
+                  <ion-select-option value="27">27</ion-select-option>
+                  <ion-select-option value="28">28</ion-select-option>
+                  <ion-select-option value="29" *ngIf="item.month != '02'">29</ion-select-option>
+                  <ion-select-option value="30" *ngIf="item.month != '02'">30</ion-select-option>
+                  <ion-select-option value="31" *ngIf="month == '01' || month == '03' || month == '05' || month == '07' || month == '08' || month == '10' || month == '12'">31</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4" class="ion-no-padding">
+              <ion-item class="ion-no-padding transparent dob" lines="none">
+                <ion-select [(ngModel)]="item.month" [ngModelOptions]="{standalone: true}">
+                  <ion-select-option value="01">01</ion-select-option>
+                  <ion-select-option value="02">02</ion-select-option>
+                  <ion-select-option value="03">03</ion-select-option>
+                  <ion-select-option value="04">04</ion-select-option>
+                  <ion-select-option value="05">05</ion-select-option>
+                  <ion-select-option value="06">06</ion-select-option>
+                  <ion-select-option value="07">07</ion-select-option>
+                  <ion-select-option value="08">08</ion-select-option>
+                  <ion-select-option value="09">09</ion-select-option>
+                  <ion-select-option value="10">10</ion-select-option>
+                  <ion-select-option value="11">11</ion-select-option>
+                  <ion-select-option value="12">12</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4" class="ion-no-padding">
+              <ion-item class="ion-no-padding transparent dob" lines="none">
+                <ion-select [(ngModel)]="item.year" [ngModelOptions]="{standalone: true}">
+                  <ion-select-option *ngFor="let x of years" [value]="x.year">{{x.year}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="ion-no-padding transparent input" lines="none">
+              <ion-icon src="./assets/svg/phone.svg"></ion-icon>
+              <ion-input required type="text" placeholder="Phone number" [(ngModel)]="item.phoneNumber"
+                [ngModelOptions]="{standalone: true}">
+              </ion-input>
+              <ion-icon *ngIf="!isPhoneNumberValid" class="icon-font-sm error-color error-icon" name="alert-circle">
+              </ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="ion-no-padding transparent input" lines="none">
+              <ion-icon src="./assets/svg/mail.svg"></ion-icon>
+              <ion-input required type="text" placeholder="Email address" [(ngModel)]="item.email"
+                [ngModelOptions]="{standalone: true}">
+              </ion-input>
+              <ion-icon *ngIf="!isEmailValid" class="icon-font-sm error-color error-icon" name="alert-circle">
+              </ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="ion-no-padding transparent input" lines="none">
+              <ion-icon src="./assets/svg/lock.svg"></ion-icon>
+              <ion-input required type="password" placeholder="Password" [(ngModel)]="item.password"
+                [ngModelOptions]="{standalone: true}">
+              </ion-input>
+              <ion-icon *ngIf="!isPasswordValid" class="icon-font-sm error-color error-icon" name="alert-circle">
+              </ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item class="ion-no-padding transparent input" lines="none">
+              <ion-icon src="./assets/svg/lock.svg"></ion-icon>
+              <ion-input required type="password" placeholder="Confirm Password" [(ngModel)]="item.confirmPassword"
+                [ngModelOptions]="{standalone: true}">
+              </ion-input>
+              <ion-icon *ngIf="!isConfirmPasswordValid" class="icon-font-sm error-color error-icon" name="alert-circle">
+              </ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <div class="clearfix"></div>
+          <ion-row class="ion-no-padding">
+            <ion-col size="12" class="ion-padding">
+              <!---Signup button-->
+              <ion-button color="app-primary" class="ion-text-capitalize signup-button" expand="block"
+                (click)="onRegisterFunc()" [disabled]="isRegister">
+                <span *ngIf="!isRegister">REGISTRATION</span>
+                <ion-spinner name="circles" *ngIf="isRegister" color="light"></ion-spinner>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

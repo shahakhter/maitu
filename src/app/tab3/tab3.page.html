@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goMyProfile()">
+      <div class="profile-pic" [style.background-image]="'url(' + myphotoURL + ')'"></div>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="ellipsis-vertical-outline" class="options" (click)="presentActionSheetReport()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding">
+        <ion-slides [options]="optionsm" pager="false">
+          <ion-slide *ngFor="let item of dummyUsers">
+            <ion-card class="box-shadow">
+              <div class="gallery-thumbnail" [style.backgroundImage]="'url(./assets/imgs/profile-placeholder.png)'">
+                <div class="gallery-caption custom-font">
+                </div>
+              </div>
+              <ion-card-content>
+                <ion-item lines="none" class="ion-no-padding">
+                  <ion-label slot="start" class="ion-text-wrap">
+                    <ion-label class="text-size-md font-bold">
+                      <ion-skeleton-text animated style="width: 50%; height: 15px; border-radius: 5px;"></ion-skeleton-text>
+                    </ion-label>
+                  </ion-label>
+                  <ion-button slot="end" class="show-button default-button">
+                    SHOW
+                  </ion-button>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding">
+        <ion-slides [options]="optionsm" pager="false">
+          <ion-slide *ngFor="let item of users">
+            <ion-card class="box-shadow">
+              <div class="gallery-thumbnail" [style.backgroundImage]="'url(' + item.photoURL + ')'">
+                <div class="gallery-caption custom-font">
+                  <ion-grid>
+                    <ion-row class="ion-align-items-center">
+                      <ion-col size="3" class="ion-text-center" *ngFor="let child of item.childs">
+                        <ion-icon class="docIcon" *ngIf="child.childGender === 'Boy'" src="./assets/svg/boy.svg"></ion-icon>
+                        <ion-icon class="docIcon" *ngIf="child.childGender === 'Girl'" src="./assets/svg/girl.svg"></ion-icon>
+                        <br>
+                        <span class="text-size-sm">{{ child.childAge }}</span>
+                      </ion-col>
+                      <ion-col size="3" class="ion-text-center" *ngIf="item.marital">
+                        <ion-icon class="docIcon" src="./assets/svg/relation.svg"></ion-icon>
+                        <br>
+                        <span class="text-size-sm">{{ item.marital }}</span>
+                      </ion-col>
+                      <ion-col size="3" class="ion-text-center" *ngIf="item.star">
+                        <ion-icon class="docIcon" src="./assets/svg/star.svg"></ion-icon>
+                        <br>
+                        <span class="text-size-sm">{{ item.star }}</span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+              </div>
+              <ion-card-content>
+                <ion-item lines="none" class="ion-no-padding">
+                  <ion-label slot="start" class="ion-text-wrap">
+                    <ion-label class="text-size-md font-bold">{{item.firstName}}</ion-label>
+                    <ion-label class="text-color-primary">
+                      <ion-icon src="./assets/svg/City.svg"></ion-icon>
+                      {{item.city}}
+                    </ion-label>
+                  </ion-label>
+                  <ion-button slot="end" class="show-button default-button" (click)="goProfile(item.uid)">
+                    SHOW
+                  </ion-button>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="empty-users" *ngIf="(!dummyUsers.length && !users.length)">
+    <div style="text-align:center">
+      <img src="assets/imgs/empty_appointment.png" alt="no offers" />
+      <span style="color:#9E9E9E; font-weight:bold;">
+        No User Nearby You
+      </span>
+    </div>
+  </div>
+</ion-content>

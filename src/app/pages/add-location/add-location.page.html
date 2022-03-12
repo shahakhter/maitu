@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start" (click)="dismiss()">
+      <ion-icon name="chevron-back-outline" class="options"></ion-icon>
+    </ion-buttons>
+    <ion-item lines="none">
+      <ion-label>
+        <span class="text-size-xs font-bold">Your Location</span>
+        <p class="text-size-sd ion-text-wrap">You can move Marker to change location.</p>
+      </ion-label>
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" class="default-button share" color="app-primary" (click)="share()" [disabled]="!locationCoords">
+        Share
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <input type="text" class="native-input sc-ion-input-ios" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search> -->
+
+  <agm-map [latitude]="locationCoords.latitude" [longitude]="locationCoords.longitude" [zoom]="zoom">
+    <agm-marker [latitude]="locationCoords.latitude" [longitude]="locationCoords.longitude" [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"></agm-marker>
+  </agm-map>
+
+  <!-- <h5>Address: {{address}}</h5>
+  <div>Latitude: {{locationCoords.latitude}}</div>
+  <div>Longitude: {{locationCoords.longitude}}</div> -->
+
+</ion-content>

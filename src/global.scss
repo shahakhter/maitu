@@ -1,0 +1,142 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import "./scss/post.scss";
+
+.half-modal .modal-wrapper {
+  //height: 100%;
+  //top: 0;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  position: absolute;
+  display: block;
+}
+
+.half-modals .modal-wrapper {
+  height: 60%;
+  top: 20%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  position: absolute;
+  display: block;
+}
+
+.dialog-modal .modal-wrapper {
+  width: 70%;
+  height: 50%;
+  border-radius: 15px;
+}
+
+.my-modal {
+  --background: #222;
+}
+
+ion-item {
+  --highlight-color-valid: transparent;
+  --highlight-color-invalid: transparent;
+  --highlight-color-focused: var(--ion-color-light);
+}
+
+.highlight {
+  color: var(--ion-color-primary);
+}
+
+.searchbar-input {
+  background: #f3f3f3 !important;
+  border-radius: 6px !important;
+  height: 40px !important;
+  //max-width: 400px;
+  font-size: 16px !important;
+  border: 1px solid transparent;
+}
+
+.popover .popover-content {
+  width: 50%;
+}
+
+.action-sheet-button.ActionButton {
+  color: var(--cs-text-primary) !important;
+  background: var(--cs-text-secondary) !important;
+  ion-icon {
+    color: var(--cs-text-primary) !important;
+  }
+}
+
+*[scrollX="true"] {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollX {
+    flex: 0 0 auto;
+  }
+}
+
+#js--sc--container {
+  max-width: 300px;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+  position: relative;
+  canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 99;
+    border-radius: 5px;
+  }
+  .cardamountcss {
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+    .won-amnt {
+      font-size: 3em;
+      color: #399205;
+      font-weight: bold;
+    }
+    .won-text {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: #424242;
+    }
+  }
+  .sc__inner {
+    background-color: #ffffff;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #26005f;
+  }
+}
